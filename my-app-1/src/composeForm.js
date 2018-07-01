@@ -1,17 +1,31 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import SingleTextEntry from './forms'
-
+import React, { Component } from 'react';
+import SingleTextEntry from './forms';
 
 class ComposeForm extends Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        const nameField = document.getElementsByName('fullName')[0];
+        const emailField = document.getElementsByName('email')[0];
+        const incomeField = document.getElementsByName('income')[0];
+
+        this.props.callbackFunction(nameField, emailField, incomeField);
+    }
+
     render() {
-        return(
+        return (
             <div>
-                <SingleTextEntry fieldTitle='Full Name' formName='signup' /><br />
-                <SingleTextEntry fieldTitle='Email' formName='signup' /><br />
-                <SingleTextEntry fieldTitle='Monthly Income' formName='signup' /><br />
+                <SingleTextEntry fieldTitle='Full Name' formName='fullName' /><br />
+                <SingleTextEntry fieldTitle='Email' formName='email' /><br />
+                <SingleTextEntry fieldTitle='Monthly Income' formName='income' /><br />
+                <button onClick={this.handleClick}>
+                    Submit
+                </button>
             </div>
-        )
+        );
     }
 }
 

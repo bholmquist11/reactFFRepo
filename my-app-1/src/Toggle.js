@@ -1,20 +1,19 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component } from 'react';
 
 
 class Toggle extends Component {
     constructor(props) {
-        super(props)
-        this.state = {isToggleOn: true};
+        super(props);
+        this.state = { isToggleOn: true };
 
         // "Necessary to make 'this' work in callback..." uhh ok
         this.handleClick = this.handleClick.bind(this);
     }
-    
+
     handleClick() {
-        this.setState(prevState => ({
-            isToggleOn: !prevState.isToggleOn
-        }))
+        this.setState((prevState) => ({
+            isToggleOn: !prevState.isToggleOn,
+        }));
 
     }
 

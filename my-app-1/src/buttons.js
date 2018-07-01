@@ -1,14 +1,17 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component } from 'react';
 
 class Button extends Component {
-	render() {
-		return(
-			<button style={{fontSize: this.props.fontSize, fontWeight:600}}>
-				Button {this.props.name}!
-			</button>
-		)
-	}
+    handleClick() {
+        console.log('This was clicked native to button comp')
+    }
+
+    render() {
+        return (
+            <button onClick={this.handleClick} style={{ fontSize: this.props.fontSize, fontWeight:600 }}>
+                {this.props.text}
+            </button>
+        );
+    }
 }
 
 
