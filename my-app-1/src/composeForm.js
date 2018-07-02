@@ -16,11 +16,18 @@ class ComposeForm extends Component {
     }
 
     render() {
+        const fields = ['Full Name', 'Email', 'Income'];
+        const elements = fields.map((fieldName, index) => {
+            return (<SingleTextEntry
+                key={index}
+                fieldTitle={fieldName}
+                formName='masterForm' />
+            );
+        });
+
         return (
             <div>
-                <SingleTextEntry fieldTitle='Full Name' formName='fullName' /><br />
-                <SingleTextEntry fieldTitle='Email' formName='email' /><br />
-                <SingleTextEntry fieldTitle='Monthly Income' formName='income' /><br />
+                {elements}
                 <button onClick={this.handleClick}>
                     Submit
                 </button>
