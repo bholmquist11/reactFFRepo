@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ComposeForm from './composeForm';
 import Greeting from './Greeting.js';
 import Toggle from './Toggle.js';
+import TutorCardListing from './TutorCardListing.js';
 
 
 class RenderAll extends Component {
@@ -11,7 +12,7 @@ class RenderAll extends Component {
             'Income': 0,
             'Name': 'NameTest',
         };
-        this.grabSignupData = this.grabSignupData.bind(this)
+        this.grabSignupData = this.grabSignupData.bind(this);
     }
 
 
@@ -21,7 +22,6 @@ class RenderAll extends Component {
             'Email': emailField,
             'Income': incomeField,
         });
-        console.log('Just set the state!')
     }
 
 
@@ -31,6 +31,7 @@ class RenderAll extends Component {
                 <Greeting /><br />
                 <ComposeForm callbackFunction={this.grabSignupData} /><br />
                 <Toggle /><br />
+                <TutorCardListing /><br />
             </div>
         );
     }
