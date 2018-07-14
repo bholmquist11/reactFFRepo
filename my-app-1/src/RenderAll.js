@@ -10,15 +10,11 @@ class RenderAll extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            emailSignup: 'Undefined',
-            userData: {
-                'Income': 0,
-                'Name': 'NameTest',
-            },
+            userName: '',
             userLogin: {
-                isLoggedIn: false
+                isLoggedIn: false,
             },
-        }
+        };
         this.grabFormData = this.grabFormData.bind(this);
         this.logUserIn = this.logUserIn.bind(this);
     }
@@ -26,13 +22,12 @@ class RenderAll extends Component {
     grabFormData(fieldList) {
         fieldList.map((item, index) => {
             const tempObject = {};
+
             tempObject[item.name] = item.value;
-            console.log(tempObject);
-            this.setState({
-                userData: tempObject
-            })
-            console.log(this.state)
-        })
+            this.setState(
+                tempObject,
+            );
+        });
     }
 
     logUserIn() {
@@ -47,8 +42,13 @@ class RenderAll extends Component {
         // stateComponent = this.
         return (
             <div>
-                <Greeting email={this.state.emailSignup} isLoggedIn={this.state.userLogin.isLoggedIn} />
-                <HandleLogin loginStatus={this.state.userLogin.isLoggedIn} logUserIn={this.logUserIn} grabFormData={this.grabFormData} /><br />
+                <Greeting
+                    email={this.state.userEmail}
+                    isLoggedIn={this.state.userLogin.isLoggedIn} />
+                <HandleLogin
+                    loginStatus={this.state.userLogin.isLoggedIn}
+                    logUserIn={this.logUserIn}
+                    grabFormData={this.grabFormData} /><br />
             </div>
         );
     }
