@@ -9,7 +9,7 @@ class Greeting extends Component {
     }
 
     UserGreeting() {
-        return <h1>Welcome back!</h1>;
+        return <h1>Welcome back {this.props.email}!</h1>;
     }
 
     GuestGreeting() {
@@ -17,10 +17,12 @@ class Greeting extends Component {
     }
 
     render() {
-        if (this.props.isLoggedIn === 'true') {
-            return <this.UserGreeting />;
+        if (this.props.isLoggedIn === true) {
+            const loggedInGreeting = this.UserGreeting()
+            return loggedInGreeting
         }
-        return <this.GuestGreeting />;
+            const guestGreeting = this.GuestGreeting()
+            return guestGreeting;
     }
 }
 
