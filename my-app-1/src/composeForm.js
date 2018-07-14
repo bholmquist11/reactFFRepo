@@ -1,34 +1,55 @@
 import React, { Component } from 'react';
-import SingleTextEntry from './forms';
+import SingleTextEntry from './SingleTextEntry';
+import MultiTextEntry from './MultiTextEntry';
 
 class ComposeForm extends Component {
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleClickSingleEntry = this.handleClickSingleEntry.bind(this);
     }
 
-    handleClick() {
-        const nameField = document.getElementsByName('fullName')[0];
-        const emailField = document.getElementsByName('email')[0];
-        const incomeField = document.getElementsByName('income')[0];
+    handleClickSingleEntry() {
+        const fields = this.props.fields;
+        const fieldList = fields.map((fieldData, index) => {
+            const fieldValue = document.getElementsByName(fieldData.fieldName)[0].value;
+            const fieldName = fieldData.fieldName;
+            const fieldFinal = {
+                name: fieldName,
+                value: fieldValue,
+            };
+            return fieldFinal
+        })
 
-        this.props.callbackFunction(nameField, emailField, incomeField);
+        this.props.grabFormData(fieldList)  // Always pass a function. Process data, yes, but also do you want to render something new?
+        this.props.postClickRender()
     }
 
     render() {
-        const fields = ['Full Name', 'Email', 'Income'];
-        const elements = fields.map((fieldName, index) => {
-            return (<SingleTextEntry
-                key={index}
-                fieldTitle={fieldName}
-                formName='masterForm' />
-            );
-        });
+        const fields = this.props.fields;
+        const fieldsLength = Object.keys(fields[0]).length
+        if (Object.keys(fields[0]).length == 2) {
+            var elements = fields.map((fieldInfo, index) => {
+                return (<SingleTextEntry
+                    key={index}
+                    fieldTitle={fieldInfo.fieldTitle}
+                    fieldName={fieldInfo.fieldName} />
+                );
+            });
+        } else if (Object.keys(fields[0]).length == 3) {
+            var elements = fields.map((fieldInfo, index) => {
+                return (<MultiTextEntry
+                    key={index}
+                    fieldTitle={fieldInfo.fieldTitle}
+                    fieldName1={fieldInfo.fieldName1}
+                    fieldName2={fieldInfo.fieldName2} />
+                );
+            });
+        }
 
         return (
             <div>
                 {elements}
-                <button onClick={this.handleClick}>
+                <button onClick={this.handleClickSingleEntry}>
                     Submit
                 </button>
             </div>
