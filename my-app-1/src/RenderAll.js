@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import ComposeForm from './composeForm';
 import Greeting from './Greeting.js';
-import HandleLogin from './HandleLogin.js'
-import Toggle from './Toggle.js';
-import TutorCardListing from './TutorCardListing.js';
-
+import HandleLogin from './HandleLogin.js';
+import SummaryCard from './SummaryCard.js';
 
 class RenderAll extends Component {
     constructor(props) {
@@ -17,10 +14,11 @@ class RenderAll extends Component {
         };
         this.grabFormData = this.grabFormData.bind(this);
         this.logUserIn = this.logUserIn.bind(this);
+        this.setExpensesState = this.setExpensesState.bind(this);
     }
 
     grabFormData(fieldList) {
-        fieldList.map((item, index) => {
+        fieldList.map((item) => {
             const tempObject = {};
 
             tempObject[item.name] = item.value;
@@ -31,24 +29,57 @@ class RenderAll extends Component {
     }
 
     logUserIn() {
+        console.log({
+            userLogin: {
+                isLoggedIn: true,
+            },
+        });
         this.setState({
             userLogin: {
-                isLoggedIn: true
-            }
-        })
+                isLoggedIn: true,
+            },
+        });
+    }
+
+    setExpensesState(expensesObject) {
+        console.log(expensesObject);
+        this.setState(expensesObject);
     }
 
     render() {
-        // stateComponent = this.
-        return (
-            <div>
+        const components = [
+            <div key='greetingAndLogin'>
                 <Greeting
+                    key='greeting'
                     email={this.state.userEmail}
                     isLoggedIn={this.state.userLogin.isLoggedIn} />
                 <HandleLogin
+                    key='login'
                     loginStatus={this.state.userLogin.isLoggedIn}
                     logUserIn={this.logUserIn}
-                    grabFormData={this.grabFormData} /><br />
+                    grabFormData={this.grabFormData}
+                    setExpensesState={this.setExpensesState} /><br />
+            </div>,
+        ];
+
+        if ('income' in this.state) {
+            components.push(
+                <SummaryCard
+                    key='summary'
+                    state={this.state}
+                    income={this.state.income} />
+            );
+        }
+
+        if ('expensesObject' in this.state) {
+            components.push(
+                <div>Expenses are {this.state.expensesObject.rent}</div>
+            );
+        }
+
+        return (
+            <div>
+                {components}
             </div>
         );
     }

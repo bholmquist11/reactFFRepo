@@ -29,26 +29,33 @@ class HandleLogin extends Component {
     buildSigninComp() {
         console.log('building signin form')
         const signupForm = [
-            <h2>Please sign in or sign up.</h2>,
-            <ComposeForm 
+            <h2 key='signinHeading'>Please sign in or sign up.</h2>,
+            <ComposeForm
+                key='signinForm'
                 postClickRender={this.props.logUserIn}
                 grabFormData={this.props.grabFormData}
                 fields={[
-                    {fieldTitle: 'Email Address', fieldName: 'userEmail'},
-                    {fieldTitle: 'Password', fieldName: 'passwordSignup'},
-                ]} />
-        ]
-        return signupForm
+                    { fieldLabel: 'Email Address', fieldName: 'userEmail' },
+                    { fieldLabel: 'Password', fieldName: 'passwordSignup' },
+                ]} />,
+        ];
+
+        return signupForm;
     }
 
     renderPostSignup() {
-        const onboardingForms = <OnboardingForms grabFormData={this.props.grabFormData} />
-        return onboardingForms
+        const onboardingForms = (<OnboardingForms
+            key='onboardingForms'
+            grabFormData={this.props.grabFormData}
+            setExpensesState={this.props.setExpensesState} />);
+
+        return onboardingForms;
     }
 
     render() {
-        const loginModule = this.checkStatus()
-        return loginModule
+        const loginModule = this.checkStatus();
+
+        return loginModule;
     }
 }
 
