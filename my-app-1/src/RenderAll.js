@@ -67,13 +67,8 @@ class RenderAll extends Component {
                 <SummaryCard
                     key='summary'
                     state={this.state}
-                    income={this.state.income} />
-            );
-        }
-
-        if ('expensesObject' in this.state) {
-            components.push(
-                <div>Expenses are {this.state.expensesObject.rent}</div>
+                    income={this.state.income}
+                    expensesObject={this.state.expensesObject} />
             );
         }
 
