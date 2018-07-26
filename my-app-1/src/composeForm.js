@@ -5,14 +5,14 @@ import SingleTextEntry from './SingleTextEntry';
 class ComposeForm extends Component {
     constructor(props) {
         super(props);
-        this.handleClickSingleEntry = this.handleClickSingleEntry.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClickSingleEntry() {
+    handleClick() {
         const fields = this.props.fields;
 
         const fieldList = fields.map((fieldData) => {
-            const fieldValue = document.getElementsByName(fieldData.fieldName)[0].value;
+            const fieldValue = document.getElementById(fieldData.fieldName).value;
 
             const fieldName = fieldData.fieldName;
 
@@ -55,7 +55,7 @@ class ComposeForm extends Component {
         return (
             <div>
                 {elements}
-                <button onClick={this.handleClickSingleEntry}>
+                <button onClick={this.handleClick}>
                     Submit
                 </button>
             </div>

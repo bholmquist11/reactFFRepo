@@ -6,9 +6,9 @@ import OnboardingForms from './OnboardingForms.js'
 class HandleLogin extends Component {
     constructor(props) {
         super(props);
-        this.buildSigninComp = this.buildSigninComp.bind(this)
-        this.checkStatus = this.checkStatus.bind(this)
-        this.renderPostSignup = this.renderPostSignup.bind(this)
+        this.buildSigninComp = this.buildSigninComp.bind(this);
+        this.checkStatus = this.checkStatus.bind(this);
+        this.renderPostSignup = this.renderPostSignup.bind(this);
     }
 
     checkStatus() {

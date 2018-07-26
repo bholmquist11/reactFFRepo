@@ -3,6 +3,41 @@ import Greeting from './Greeting.js';
 import HandleLogin from './HandleLogin.js';
 import SummaryCard from './SummaryCard.js';
 
+const Parse = require('parse');
+
+Parse.initialize('zTyCpMH8KpFOachUvQJmVR5ksWIv73PzPvfCFG6h',
+    'pUWo38sEcvFN8BVKWMRbcrnnP54eWwfr1ebrHcsI')
+
+Parse.serverURL = 'https://penjiapp-dev.herokuapp.com/parse/1';
+
+// const user = new Parse.User();
+
+// user.save({
+//     username: 'bholmquist11',
+//     password: 'youknow',
+// }, {
+//     success: function(response) {
+//         alert('New object created! ObjectId: ' + response.id);
+//     },
+//     error: function(response, error) {
+//         alert('Error' + error.message);
+//     },
+// });
+
+// const query = new Parse.Query('User');
+
+// query.find({
+//     success: function(results) {
+//         alert('Success.' + results.length);
+//         console.log(results);
+
+//     },
+//     error: function(results, error) {
+//         alert('Error' + error.message);
+//     },
+// });
+
+
 class RenderAll extends Component {
     constructor(props) {
         super(props);
