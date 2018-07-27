@@ -19,10 +19,7 @@ class HandleLogin extends Component {
         } {
             const onboardingForms = this.renderPostSignup();
 
-            return [
-                <h1>You are now logged in.</h1>,
-                onboardingForms,
-            ];
+            return onboardingForms
         }
     }
 

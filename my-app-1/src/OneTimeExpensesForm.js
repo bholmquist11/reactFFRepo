@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SingleTextEntry from './SingleTextEntry.js';
 
 
-class ExpensesForm extends Component {
+class OneTimeExpensesForm extends Component {
     constructor(props) {
         super(props);
 
@@ -74,4 +74,4 @@ class ExpensesForm extends Component {
     }
 }
 
-export default ExpensesForm;
+export default OneTimeExpensesForm;

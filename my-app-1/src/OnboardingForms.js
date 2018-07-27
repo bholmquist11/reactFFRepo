@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ComposeForm from './composeForm.js';
 import ExpensesForm from './ExpensesForm.js';
+import OneTimeExpensesForm from './OneTimeExpensesForm.js';
+
 
 class OnboardingForms extends Component {
     constructor(props) {
@@ -67,7 +69,7 @@ class OnboardingForms extends Component {
 
             return form;
         } else if (this.state.stage === 'oneTimeExpenses') {
-            const form = (<ComposeForm
+            const form = (<OneTimeExpensesForm
                 fields={[
                     { fieldLabel: 'Expense 1', fieldName1: 'expense1Name', fieldName2: 'expense1Value' },
                     { fieldLabel: 'Expense 2', fieldName1: 'expense2Name', fieldName2: 'expense2Value' },

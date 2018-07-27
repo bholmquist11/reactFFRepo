@@ -26,15 +26,23 @@ class SummaryCard extends Component {
         const jsxElements = [];
 
         jsxElements.push(
-            <div>Income: {this.props.income}</div>
+            <div key='summaryIncome'>Income: {this.props.income}</div>
         );
 
         if (this.props.expensesObject) {
             const sumExpenses = this.sumExpenses(this.props.expensesObject);
 
             jsxElements.push(
-                <div>Expenses: {sumExpenses}</div>
+                <div key='summaryExpenses'>Expenses: {sumExpenses}</div>
             );
+        }
+
+        if (this.props.oneTimeExpensesObject) {
+            const sumExpenses = this.sumExpenses(this.props.oneTimeExpenses);
+
+            jsxElements.push(
+                <div key='oneTimeExpenses'>One-Time Expenses: {oneTimeExpenses}</div>
+            )
         }
 
         return (

@@ -13,6 +13,8 @@ class SingleTextEntry extends Component {
         this.state = {
             value: '',
         };
+
+        this.handleChange = this.handleChange.bind(this)
     }
 
     handleChange(event) {
@@ -28,11 +30,11 @@ class SingleTextEntry extends Component {
     render() {
         return (
             <form>
-                <FormGroup controlId={this.props.fieldName}>
+                <FormGroup controlId={this.props.fieldName + 'group'}>
                     <ControlLabel>{this.props.fieldLabel}</ControlLabel>
                     <FormControl
+                        id={this.props.fieldName}
                         type='text'
-                        placeholder='Enter stuff'
                         value={this.state.value}
                         onChange={this.handleChange}
                     />

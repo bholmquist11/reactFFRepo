@@ -3,12 +3,12 @@ import Greeting from './Greeting.js';
 import HandleLogin from './HandleLogin.js';
 import SummaryCard from './SummaryCard.js';
 
-const Parse = require('parse');
+// const Parse = require('parse');
 
-Parse.initialize('zTyCpMH8KpFOachUvQJmVR5ksWIv73PzPvfCFG6h',
-    'pUWo38sEcvFN8BVKWMRbcrnnP54eWwfr1ebrHcsI')
+// Parse.initialize('zTyCpMH8KpFOachUvQJmVR5ksWIv73PzPvfCFG6h',
+//     'pUWo38sEcvFN8BVKWMRbcrnnP54eWwfr1ebrHcsI')
 
-Parse.serverURL = 'https://penjiapp-dev.herokuapp.com/parse/1';
+// Parse.serverURL = 'https://penjiapp-dev.herokuapp.com/parse/1';
 
 // const user = new Parse.User();
 
@@ -64,11 +64,6 @@ class RenderAll extends Component {
     }
 
     logUserIn() {
-        console.log({
-            userLogin: {
-                isLoggedIn: true,
-            },
-        });
         this.setState({
             userLogin: {
                 isLoggedIn: true,
@@ -81,34 +76,37 @@ class RenderAll extends Component {
         this.setState(expensesObject);
     }
 
+    setOneTimeExpensesState(oneTimeExpensesObject) {
+        this.setState(oneTimeExpensesObject);
+    }
+
     render() {
         const components = [
-            <div key='greetingAndLogin'>
-                <Greeting
-                    key='greeting'
-                    email={this.state.userEmail}
-                    isLoggedIn={this.state.userLogin.isLoggedIn} />
-                <HandleLogin
-                    key='login'
-                    loginStatus={this.state.userLogin.isLoggedIn}
-                    logUserIn={this.logUserIn}
-                    grabFormData={this.grabFormData}
-                    setExpensesState={this.setExpensesState} /><br />
-            </div>,
+            <Greeting
+                key='greeting'
+                email={this.state.userEmail}
+                isLoggedIn={this.state.userLogin.isLoggedIn} />,
+            <HandleLogin
+                key='login'
+                loginStatus={this.state.userLogin.isLoggedIn}
+                logUserIn={this.logUserIn}
+                grabFormData={this.grabFormData}
+                setExpensesState={this.setExpensesState} />,
         ];
 
         if ('income' in this.state) {
-            components.push(
+            components.splice(1, 0,
                 <SummaryCard
                     key='summary'
                     state={this.state}
                     income={this.state.income}
-                    expensesObject={this.state.expensesObject} />
+                    expensesObject={this.state.expensesObject}
+                    oneTimeExpensesObject={this.state.oneTimeExpensesObject} />
             );
         }
 
         return (
-            <div>
+            <div key='allComponents'>
                 {components}
             </div>
         );
