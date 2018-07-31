@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import { FormGroup } from 'react-bootstrap';
 import SingleTextEntry from './SingleTextEntry.js';
 
 
@@ -15,12 +19,12 @@ class ExpensesForm extends Component {
         const fields = this.props.fields;
 
         const fieldList = fields.map((fieldData) => {
-            const fieldValue = document.getElementById(fieldData.fieldName).value;
+            const fieldValue = document.getElementById(fieldData.fieldId).value;
 
-            const fieldName = fieldData.fieldName;
+            const fieldId = fieldData.fieldLabel;
 
             const fieldFinal = {
-                name: fieldName,
+                name: fieldId,
                 value: fieldValue,
             };
 
@@ -47,12 +51,12 @@ class ExpensesForm extends Component {
         const formRowList = fieldsInfo.map((field) => {
             const fieldLabel = field.fieldLabel;
 
-            const fieldName = field.fieldName;
+            const fieldId = field.fieldId;
 
             const fieldJSX = (<SingleTextEntry
-                key={fieldName}
+                key={fieldId}
                 fieldLabel={fieldLabel}
-                fieldName={fieldName} />);
+                fieldId={fieldId} />);
 
             return fieldJSX;
         });
@@ -64,12 +68,14 @@ class ExpensesForm extends Component {
         const fieldJSX = this.buildForm(this.props.fields);
 
         return (
-            <div>
+            <Form horizontal={true}>
                 {fieldJSX}
-                <button onClick={this.handleClick}>
-                    Submit
-                </button>
-            </div>
+                <FormGroup>
+                    <Col smOffset={2} sm={10}>
+                        <Button type='submit' onClick={this.handleClick}>Submit</Button>
+                    </Col>
+                </FormGroup>
+            </Form>
         );
     }
 }

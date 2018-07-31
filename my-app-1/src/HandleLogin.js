@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ComposeForm from './composeForm.js';
-import OnboardingForms from './OnboardingForms.js'
+import ComposeForm from './ComposeForm.js';
+import OnboardingForms from './OnboardingForms.js';
 
 
 class HandleLogin extends Component {
@@ -19,12 +19,11 @@ class HandleLogin extends Component {
         } {
             const onboardingForms = this.renderPostSignup();
 
-            return onboardingForms
+            return onboardingForms;
         }
     }
 
     buildSigninComp() {
-        console.log('building signin form')
         const signupForm = [
             <h2 key='signinHeading'>Please sign in or sign up.</h2>,
             <ComposeForm
@@ -32,8 +31,8 @@ class HandleLogin extends Component {
                 postClickRender={this.props.logUserIn}
                 grabFormData={this.props.grabFormData}
                 fields={[
-                    { fieldLabel: 'Email Address', fieldName: 'userEmail' },
-                    { fieldLabel: 'Password', fieldName: 'passwordSignup' },
+                    { fieldLabel: 'Email Address', fieldId: 'userEmail' },
+                    { fieldLabel: 'Password', fieldId: 'passwordSignup' },
                 ]} />,
         ];
 

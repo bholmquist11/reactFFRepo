@@ -72,7 +72,6 @@ class RenderAll extends Component {
     }
 
     setExpensesState(expensesObject) {
-        console.log(expensesObject);
         this.setState(expensesObject);
     }
 

@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import SingleTextEntry from './SingleTextEntry.js';
+import { Button } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import { FormGroup } from 'react-bootstrap';
+import MultiTextEntry from './MultiTextEntry.js';
 
 
 class OneTimeExpensesForm extends Component {
@@ -15,13 +19,16 @@ class OneTimeExpensesForm extends Component {
         const fields = this.props.fields;
 
         const fieldList = fields.map((fieldData) => {
-            const fieldValue = document.getElementById(fieldData.fieldName).value;
+            const expenseValue = document.getElementById(fieldData.fieldId1).value;
 
-            const fieldName = fieldData.fieldName;
+            const expenseDate = document.getElementById(fieldData.fieldId2).value;
+
+            const fieldName = fieldData.fieldLabel;
 
             const fieldFinal = {
                 name: fieldName,
-                value: fieldValue,
+                value: expenseValue,
+                date: expenseDate,
             };
 
             return fieldFinal;
@@ -31,15 +38,15 @@ class OneTimeExpensesForm extends Component {
         // this.props.grabFormData(fieldList);  // Always pass a function. Process data, yes, but also do you want to render something new?
 
         // Now, we want to structure the data into a single object and then setState in parent
-        const expensesObjectTemp = {};
+        const oneTimeExpensesObjectTemp = {};
 
         for (const key in fieldList) {
             const tempData = fieldList[key];
 
-            expensesObjectTemp[tempData.name] = tempData.value;
+            oneTimeExpensesObjectTemp[tempData.name] = tempData.value;
         }
 
-        this.props.setExpensesState({ expensesObject: expensesObjectTemp });
+        this.props.setOneTimeExpensesState({ oneTimeExpensesObject: oneTimeExpensesObjectTemp });
         this.props.postClickRender();
     }
 
@@ -47,12 +54,15 @@ class OneTimeExpensesForm extends Component {
         const formRowList = fieldsInfo.map((field) => {
             const fieldLabel = field.fieldLabel;
 
-            const fieldName = field.fieldName;
+            const fieldId1 = field.fieldId1;
 
-            const fieldJSX = (<SingleTextEntry
-                key={fieldName}
+            const fieldId2 = field.fieldId2;
+
+            const fieldJSX = (<MultiTextEntry
+                key={fieldLabel}
                 fieldLabel={fieldLabel}
-                fieldName={fieldName} />);
+                fieldId1={fieldId1}
+                fieldId2={fieldId2} />);
 
             return fieldJSX;
         });
@@ -64,12 +74,19 @@ class OneTimeExpensesForm extends Component {
         const fieldJSX = this.buildForm(this.props.fields);
 
         return (
-            <div>
+            <Form horizontal={true}>
+                <FormGroup>
+                    <Col sm={4} />
+                    <Col sm={3}>Expense Value</Col>
+                    <Col sm={3}>Expense Date</Col>
+                </FormGroup>
                 {fieldJSX}
-                <button onClick={this.handleClick}>
-                    Submit
-                </button>
-            </div>
+                <FormGroup>
+                    <Col smOffset={2}>
+                        <Button type='submit' onClick={this.handleClick}>Submit One-Time Expenses</Button>
+                    </Col>
+                </FormGroup>
+            </Form>
         );
     }
 }

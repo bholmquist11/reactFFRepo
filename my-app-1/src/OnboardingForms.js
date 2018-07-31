@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ComposeForm from './composeForm.js';
+import ComposeForm from './ComposeForm.js';
 import ExpensesForm from './ExpensesForm.js';
 import OneTimeExpensesForm from './OneTimeExpensesForm.js';
 
@@ -45,8 +45,9 @@ class OnboardingForms extends Component {
         if (this.state.stage === 'income') {
             const form = (<ComposeForm
                 fields={[
-                    { fieldLabel: 'First Name', fieldName: 'userName' },
-                    { fieldLabel: 'Monthly Income from All Sources', fieldName: 'income' }                ]}
+                    { fieldLabel: 'First Name', fieldId: 'userName' },
+                    { fieldLabel: 'Monthly Income from All Sources', fieldId: 'income' },
+                ]}
                 grabFormData={this.props.grabFormData}
                 postClickRender={this.renderExpenses} />);
 
@@ -54,14 +55,14 @@ class OnboardingForms extends Component {
         } else if (this.state.stage === 'expenses') {
             const form = (<ExpensesForm
                 fields={[
-                    { fieldLabel: 'Rent / Mortgage', fieldName: 'rent' },
-                    { fieldLabel: 'Internet', fieldName: 'internet' },
-                    { fieldLabel: 'Water, Gas, Electric', fieldName: 'utilities' },
-                    { fieldLabel: 'Groceries', fieldName: 'groceries' },
-                    { fieldLabel: 'Auto Payment', fieldName: 'autoPayment' },
-                    { fieldLabel: 'Auto Insurance', fieldName: 'autoInsurance' },
-                    { fieldLabel: 'Eating Out', fieldName: 'eatingOut' },
-                    { fieldLabel: 'Drinks', fieldName: 'drinks' },
+                    { fieldLabel: 'Rent / Mortgage', fieldId: 'rent' },
+                    { fieldLabel: 'Internet', fieldId: 'internet' },
+                    { fieldLabel: 'Water, Gas, Electric', fieldId: 'utilities' },
+                    { fieldLabel: 'Groceries', fieldId: 'groceries' },
+                    { fieldLabel: 'Auto Payment', fieldId: 'autoPayment' },
+                    { fieldLabel: 'Auto Insurance', fieldId: 'autoInsurance' },
+                    { fieldLabel: 'Eating Out', fieldId: 'eatingOut' },
+                    { fieldLabel: 'Drinks', fieldId: 'drinks' },
                 ]}
                 grabFormData={this.props.grabFormData}
                 postClickRender={this.renderOneTimeExpenses}
@@ -71,22 +72,22 @@ class OnboardingForms extends Component {
         } else if (this.state.stage === 'oneTimeExpenses') {
             const form = (<OneTimeExpensesForm
                 fields={[
-                    { fieldLabel: 'Expense 1', fieldName1: 'expense1Name', fieldName2: 'expense1Value' },
-                    { fieldLabel: 'Expense 2', fieldName1: 'expense2Name', fieldName2: 'expense2Value' },
-                    { fieldLabel: 'Expense 3', fieldName1: 'expense3Name', fieldName2: 'expense3Value' },
-                    { fieldLabel: 'Expense 4', fieldName1: 'expense4Name', fieldName2: 'expense4Value' },
-                    { fieldLabel: 'Monthly Income from All Sources', fieldName: 'income' },
+                    { fieldLabel: 'Expense 1', fieldName1: 'expense1Value', fieldName2: 'expense1Date' },
+                    { fieldLabel: 'Expense 2', fieldName1: 'expense2Value', fieldName2: 'expense2Date' },
+                    { fieldLabel: 'Expense 3', fieldName1: 'expense3Value', fieldName2: 'expense3Date' },
+                    { fieldLabel: 'Expense 4', fieldName1: 'expense4Value', fieldName2: 'expense4Date' },
                 ]}
                 grabFormData={this.props.grabFormData}
-                postClickRender={this.accountBalances} />);
+                postClickRender={this.renderAccountBalances}
+                setOneTimeExpensesState={this.props.setOneTimeExpensesState} />);
 
             return form;
         } else if (this.state.stage === 'accountBalances') {
             const form = (<ComposeForm
                 fields={[
-                    { fieldLabel: 'Checking Account', fieldName: 'checking' },
-                    { fieldLabel: 'Savings and Investments', fieldName: 'savings' },
-                    { fieldLabel: 'Credit Debt (-)', fieldName: 'credit' },
+                    { fieldLabel: 'Checking Account', fieldId: 'checking' },
+                    { fieldLabel: 'Savings and Investments', fieldId: 'savings' },
+                    { fieldLabel: 'Credit Debt (-)', fieldId: 'credit' },
                 ]}
                 grabFormData={this.props.grabFormData}
                 postClickRender={this.completeOnboarding} />);

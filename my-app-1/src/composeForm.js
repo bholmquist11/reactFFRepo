@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import MultiTextEntry from './MultiTextEntry';
+import { Button } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import { FormGroup } from 'react-bootstrap';
 import SingleTextEntry from './SingleTextEntry';
 
 class ComposeForm extends Component {
@@ -12,9 +15,9 @@ class ComposeForm extends Component {
         const fields = this.props.fields;
 
         const fieldList = fields.map((fieldData) => {
-            const fieldValue = document.getElementById(fieldData.fieldName).value;
+            const fieldValue = document.getElementById(fieldData.fieldId).value;
 
-            const fieldName = fieldData.fieldName;
+            const fieldName = fieldData.fieldId;
 
             const fieldFinal = {
                 name: fieldName,
@@ -31,34 +34,25 @@ class ComposeForm extends Component {
     render() {
         const fields = this.props.fields;
 
-        let elements = '';
+        let fieldJSX = '';
 
-        if (Object.keys(fields[0]).length === 2) {
-            elements = fields.map((fieldInfo, index) => {
-                return (<SingleTextEntry
-                    key={index}
-                    fieldLabel={fieldInfo.fieldLabel}
-                    fieldName={fieldInfo.fieldName} />
-                );
-            });
-        } else if (Object.keys(fields[0]).length === 3) {
-            elements = fields.map((fieldInfo, index) => {
-                return (<MultiTextEntry
-                    key={index}
-                    fieldLabel={fieldInfo.fieldLabel}
-                    fieldName1={fieldInfo.fieldName1}
-                    fieldName2={fieldInfo.fieldName2} />
-                );
-            });
-        }
+        fieldJSX = fields.map((fieldInfo, index) => {
+            return (<SingleTextEntry
+                key={index}
+                fieldLabel={fieldInfo.fieldLabel}
+                fieldId={fieldInfo.fieldId} />
+            );
+        });
 
         return (
-            <div>
-                {elements}
-                <button onClick={this.handleClick}>
-                    Submit
-                </button>
-            </div>
+            <Form horizontal={true}>
+                {fieldJSX}
+                <FormGroup>
+                    <Col smOffset={2} sm={10}>
+                        <Button type='submit' onClick={this.handleClick}>Submit</Button>
+                    </Col>
+                </FormGroup>
+            </Form>
         );
     }
 }

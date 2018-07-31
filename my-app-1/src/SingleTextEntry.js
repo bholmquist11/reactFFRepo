@@ -3,8 +3,6 @@ import { Col } from 'react-bootstrap';
 import { ControlLabel } from 'react-bootstrap';
 import { FormControl } from 'react-bootstrap';
 import { FormGroup } from 'react-bootstrap';
-import { Grid } from 'react-bootstrap';
-import { Row } from 'react-bootstrap';
 
 
 class SingleTextEntry extends Component {
@@ -14,32 +12,31 @@ class SingleTextEntry extends Component {
             value: '',
         };
 
-        this.handleChange = this.handleChange.bind(this)
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event) {
         const formInput = event.target.value;
 
-        const uppercaseInput = formInput.toUpperCase();
-
         this.setState({
-            value: uppercaseInput,
+            value: formInput,
         });
     }
 
     render() {
         return (
-            <form>
-                <FormGroup controlId={this.props.fieldName + 'group'}>
-                    <ControlLabel>{this.props.fieldLabel}</ControlLabel>
+            <FormGroup>
+                <Col componentClass={ControlLabel} lg={2}>
+                    {this.props.fieldLabel}
+                </Col>
+                <Col lg={4}>
                     <FormControl
-                        id={this.props.fieldName}
+                        id={this.props.fieldId}
                         type='text'
                         value={this.state.value}
-                        onChange={this.handleChange}
-                    />
-                </FormGroup>
-            </form>
+                        onChange={this.handleChange} />
+                </Col>
+            </FormGroup>
         );
     }
 }

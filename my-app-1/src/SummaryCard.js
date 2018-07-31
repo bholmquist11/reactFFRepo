@@ -14,7 +14,7 @@ class SummaryCard extends Component {
         for (let key in expensesObject) {
             let valueTempString = expensesObject[key];
 
-            let valueTemp = parseInt(valueTempString);
+            let valueTemp = parseInt(valueTempString, 10);
 
             sumTotal += valueTemp;
         }
@@ -38,11 +38,11 @@ class SummaryCard extends Component {
         }
 
         if (this.props.oneTimeExpensesObject) {
-            const sumExpenses = this.sumExpenses(this.props.oneTimeExpenses);
+            const sumOneTimeExpenses = this.sumExpenses(this.props.oneTimeExpensesObject);
 
             jsxElements.push(
-                <div key='oneTimeExpenses'>One-Time Expenses: {oneTimeExpenses}</div>
-            )
+                <div key='sumOneTimeExpenses'>One-Time Expenses: {sumOneTimeExpenses}</div>
+            );
         }
 
         return (
