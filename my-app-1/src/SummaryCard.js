@@ -1,5 +1,6 @@
 import './SummaryCard.css';
 import React, { Component } from 'react';
+import { Col } from 'react-bootstrap';
 
 class SummaryCard extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class SummaryCard extends Component {
         let sumTotal = 0;
 
         for (let key in expensesObject) {
-            let valueTempString = expensesObject[key];
+            let valueTempString = expensesObject[key].value;
 
             let valueTemp = parseInt(valueTempString, 10);
 
@@ -26,14 +27,24 @@ class SummaryCard extends Component {
         const jsxElements = [];
 
         jsxElements.push(
-            <div key='summaryIncome'>Income: {this.props.income}</div>
+            <Col
+                xs={6}
+                lg={2}
+                className='SummaryCard'>
+                <div key='summaryIncome'>Income: {this.props.income}</div>
+            </Col>
         );
 
         if (this.props.expensesObject) {
             const sumExpenses = this.sumExpenses(this.props.expensesObject);
 
             jsxElements.push(
-                <div key='summaryExpenses'>Expenses: {sumExpenses}</div>
+                <Col
+                    xs={6}
+                    lg={2}
+                    className='SummaryCard'>
+                    <div key='summaryExpenses'>Expenses: {sumExpenses}</div>
+                </Col>
             );
         }
 
@@ -41,14 +52,19 @@ class SummaryCard extends Component {
             const sumOneTimeExpenses = this.sumExpenses(this.props.oneTimeExpensesObject);
 
             jsxElements.push(
-                <div key='sumOneTimeExpenses'>One-Time Expenses: {sumOneTimeExpenses}</div>
+                <Col
+                    xs={6}
+                    lg={2}
+                    className='SummaryCard'>
+                    <div key='sumOneTimeExpenses'>One-Time Expenses: {sumOneTimeExpenses}</div>
+                </Col>
             );
         }
 
         return (
-            <div className='SummaryCard'>
+            <Col xs={12}>
                 {jsxElements}
-            </div>
+            </Col>
         );
 
     }

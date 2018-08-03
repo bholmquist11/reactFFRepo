@@ -6,7 +6,7 @@ import SummaryCard from './SummaryCard.js';
 // const Parse = require('parse');
 
 // Parse.initialize('zTyCpMH8KpFOachUvQJmVR5ksWIv73PzPvfCFG6h',
-//     'pUWo38sEcvFN8BVKWMRbcrnnP54eWwfr1ebrHcsI')
+//     'pUWo38sEcvFN8BVKWMRbcrnnP54eWwfr1ebrHcsI');
 
 // Parse.serverURL = 'https://penjiapp-dev.herokuapp.com/parse/1';
 

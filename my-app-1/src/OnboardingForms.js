@@ -72,10 +72,10 @@ class OnboardingForms extends Component {
         } else if (this.state.stage === 'oneTimeExpenses') {
             const form = (<OneTimeExpensesForm
                 fields={[
-                    { fieldLabel: 'Expense 1', fieldName1: 'expense1Value', fieldName2: 'expense1Date' },
-                    { fieldLabel: 'Expense 2', fieldName1: 'expense2Value', fieldName2: 'expense2Date' },
-                    { fieldLabel: 'Expense 3', fieldName1: 'expense3Value', fieldName2: 'expense3Date' },
-                    { fieldLabel: 'Expense 4', fieldName1: 'expense4Value', fieldName2: 'expense4Date' },
+                    { fieldLabel: 'Expense 1', fieldId1: 'expense1Name', fieldId2: 'expense1Value', fieldId3: 'expense1Date' },
+                    { fieldLabel: 'Expense 2', fieldId1: 'expense2Name', fieldId2: 'expense2Value', fieldId3: 'expense1Date' },
+                    { fieldLabel: 'Expense 3', fieldId1: 'expense3Name', fieldId2: 'expense3Value', fieldId3: 'expense1Date' },
+                    { fieldLabel: 'Expense 4', fieldId1: 'expense4Name', fieldId2: 'expense4Value', fieldId3: 'expense1Date' },
                 ]}
                 grabFormData={this.props.grabFormData}
                 postClickRender={this.renderAccountBalances}

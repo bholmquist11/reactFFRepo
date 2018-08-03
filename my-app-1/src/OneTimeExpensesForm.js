@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { FormGroup } from 'react-bootstrap';
-import MultiTextEntry from './MultiTextEntry.js';
+import MultiTextEntryDate from './MultiTextEntryDate.js';
 
 
 class OneTimeExpensesForm extends Component {
@@ -19,14 +19,14 @@ class OneTimeExpensesForm extends Component {
         const fields = this.props.fields;
 
         const fieldList = fields.map((fieldData) => {
-            const expenseValue = document.getElementById(fieldData.fieldId1).value;
+            const expenseName = document.getElementById(fieldData.fieldId1).value;
 
-            const expenseDate = document.getElementById(fieldData.fieldId2).value;
+            const expenseValue = document.getElementById(fieldData.fieldId2).value;
 
-            const fieldName = fieldData.fieldLabel;
+            const expenseDate = document.getElementById(fieldData.fieldId3).value;
 
             const fieldFinal = {
-                name: fieldName,
+                name: expenseName,
                 value: expenseValue,
                 date: expenseDate,
             };
@@ -43,7 +43,7 @@ class OneTimeExpensesForm extends Component {
         for (const key in fieldList) {
             const tempData = fieldList[key];
 
-            oneTimeExpensesObjectTemp[tempData.name] = tempData.value;
+            oneTimeExpensesObjectTemp[tempData.name] = tempData;
         }
 
         this.props.setOneTimeExpensesState({ oneTimeExpensesObject: oneTimeExpensesObjectTemp });
@@ -58,7 +58,7 @@ class OneTimeExpensesForm extends Component {
 
             const fieldId2 = field.fieldId2;
 
-            const fieldJSX = (<MultiTextEntry
+            const fieldJSX = (<MultiTextEntryDate
                 key={fieldLabel}
                 fieldLabel={fieldLabel}
                 fieldId1={fieldId1}
@@ -76,7 +76,8 @@ class OneTimeExpensesForm extends Component {
         return (
             <Form horizontal={true}>
                 <FormGroup>
-                    <Col sm={4} />
+                    <Col sm={2} />
+                    <Col sm={3}>Expense Name</Col>
                     <Col sm={3}>Expense Value</Col>
                     <Col sm={3}>Expense Date</Col>
                 </FormGroup>

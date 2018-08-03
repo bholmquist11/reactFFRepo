@@ -40,7 +40,7 @@ class ExpensesForm extends Component {
         for (const key in fieldList) {
             const tempData = fieldList[key];
 
-            expensesObjectTemp[tempData.name] = tempData.value;
+            expensesObjectTemp[tempData.name] = tempData;
         }
 
         this.props.setExpensesState({ expensesObject: expensesObjectTemp });

@@ -48,7 +48,7 @@ class ComposeForm extends Component {
             <Form horizontal={true}>
                 {fieldJSX}
                 <FormGroup>
-                    <Col smOffset={2} sm={10}>
+                    <Col smOffset={1} sm={10}>
                         <Button type='submit' onClick={this.handleClick}>Submit</Button>
                     </Col>
                 </FormGroup>
