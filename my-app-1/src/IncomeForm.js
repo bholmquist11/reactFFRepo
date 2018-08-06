@@ -5,7 +5,7 @@ import { Form } from 'react-bootstrap';
 import { FormGroup } from 'react-bootstrap';
 import SingleTextEntry from './SingleTextEntry';
 
-class ComposeForm extends Component {
+class IncomeForm extends Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
@@ -27,7 +27,9 @@ class ComposeForm extends Component {
             return fieldFinal;
         });
 
-        this.props.grabFormData(fieldList);
+        const incomeValue = fieldList[0].value;
+
+        this.props.setIncomeState(incomeValue);
         this.props.switchStage(this.props.newStage);
     }
 
@@ -58,4 +60,4 @@ class ComposeForm extends Component {
 }
 
 
-export default ComposeForm;
+export default IncomeForm;

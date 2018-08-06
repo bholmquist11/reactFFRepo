@@ -1,5 +1,11 @@
 .SummaryCard {
     background-color: #f2f2f2;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    color: #666666;
     font-family: Muli, Sans-Serif;
-    box-shadow: 0 0 1 0 #666666;
+    font-weight: 600;
+    font-size: 18px;
+    box-shadow: 0px 2px 1px #999999;
 }

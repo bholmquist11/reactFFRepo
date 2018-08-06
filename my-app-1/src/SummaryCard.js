@@ -1,6 +1,7 @@
 import './SummaryCard.css';
 import React, { Component } from 'react';
 import { Col } from 'react-bootstrap';
+import SingleSummaryCard from './SingleSummaryCard';
 
 class SummaryCard extends Component {
     constructor(props) {
@@ -27,24 +28,24 @@ class SummaryCard extends Component {
         const jsxElements = [];
 
         jsxElements.push(
-            <Col
-                xs={6}
-                lg={2}
-                className='SummaryCard'>
-                <div key='summaryIncome'>Income: {this.props.income}</div>
-            </Col>
+            <SingleSummaryCard
+                label='Income'
+                value={this.props.income}
+                stage={this.props.stage}
+                cardStage='income'
+                switchStage={this.props.switchStage} />
         );
 
         if (this.props.expensesObject) {
             const sumExpenses = this.sumExpenses(this.props.expensesObject);
 
             jsxElements.push(
-                <Col
-                    xs={6}
-                    lg={2}
-                    className='SummaryCard'>
-                    <div key='summaryExpenses'>Expenses: {sumExpenses}</div>
-                </Col>
+                <SingleSummaryCard
+                    label='Expenses'
+                    value={sumExpenses}
+                    stage={this.props.stage}
+                    cardStage='expenses'
+                    switchStage={this.props.switchStage} />
             );
         }
 
@@ -52,12 +53,12 @@ class SummaryCard extends Component {
             const sumOneTimeExpenses = this.sumExpenses(this.props.oneTimeExpensesObject);
 
             jsxElements.push(
-                <Col
-                    xs={6}
-                    lg={2}
-                    className='SummaryCard'>
-                    <div key='sumOneTimeExpenses'>One-Time Expenses: {sumOneTimeExpenses}</div>
-                </Col>
+                <SingleSummaryCard
+                    label='One-time Expenses'
+                    value={sumOneTimeExpenses}
+                    stage={this.props.stage}
+                    cardStage='oneTimeExpenses'
+                    switchStage={this.props.switchStage} />
             );
         }
 

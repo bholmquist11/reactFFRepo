@@ -47,7 +47,7 @@ class OneTimeExpensesForm extends Component {
         }
 
         this.props.setOneTimeExpensesState({ oneTimeExpensesObject: oneTimeExpensesObjectTemp });
-        this.props.postClickRender();
+        this.props.switchStage(this.props.newStage);
     }
 
     buildForm(fieldsInfo) {

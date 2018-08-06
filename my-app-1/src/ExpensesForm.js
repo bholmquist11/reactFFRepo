@@ -44,7 +44,7 @@ class ExpensesForm extends Component {
         }
 
         this.props.setExpensesState({ expensesObject: expensesObjectTemp });
-        this.props.postClickRender();
+        this.props.switchStage(this.props.newStage);
     }
 
     buildForm(fieldsInfo) {

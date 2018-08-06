@@ -1,39 +1,18 @@
 import React, { Component } from 'react';
 import ComposeForm from './ComposeForm.js';
 import ExpensesForm from './ExpensesForm.js';
+import IncomeForm from './IncomeForm.js';
 import OneTimeExpensesForm from './OneTimeExpensesForm.js';
 
 
 class OnboardingForms extends Component {
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
 
-        this.renderExpenses = this.renderExpenses.bind(this);
-        this.renderOneTimeExpenses = this.renderOneTimeExpenses.bind(this);
-        this.renderAccountBalances = this.renderAccountBalances.bind(this);
-
-        this.state = {
-            stage: 'income',
-        };
-    }
-
-    renderExpenses() {
-        this.setState({
-            stage: 'expenses',
-        });
-    }
-
-    renderOneTimeExpenses() {
-        this.setState({
-            stage: 'oneTimeExpenses',
-        });
-    }
-
-    renderAccountBalances() {
-        this.setState({
-            stage: 'accountBalances',
-        });
-    }
+    //     this.state = {
+    //         stage: 'income',
+    //     };
+    // }
 
     completeOnboarding() {
         this.setState({
@@ -42,17 +21,19 @@ class OnboardingForms extends Component {
     }
 
     render() {
-        if (this.state.stage === 'income') {
-            const form = (<ComposeForm
+        if (this.props.stage === 'income') {
+            const form = (<IncomeForm
+                key='incomeForm'
                 fields={[
-                    { fieldLabel: 'First Name', fieldId: 'userName' },
                     { fieldLabel: 'Monthly Income from All Sources', fieldId: 'income' },
                 ]}
                 grabFormData={this.props.grabFormData}
-                postClickRender={this.renderExpenses} />);
+                switchStage={this.props.switchStage}
+                newStage='expenses'
+                setIncomeState={this.props.setIncomeState} />);
 
             return form;
-        } else if (this.state.stage === 'expenses') {
+        } else if (this.props.stage === 'expenses') {
             const form = (<ExpensesForm
                 fields={[
                     { fieldLabel: 'Rent / Mortgage', fieldId: 'rent' },
@@ -65,11 +46,12 @@ class OnboardingForms extends Component {
                     { fieldLabel: 'Drinks', fieldId: 'drinks' },
                 ]}
                 grabFormData={this.props.grabFormData}
-                postClickRender={this.renderOneTimeExpenses}
-                setExpensesState={this.props.setExpensesState} />);
+                switchStage={this.props.switchStage}  // Switchs stage in top-level state to trigger next form
+                newStage='oneTimeExpenses'
+                setExpensesState={this.props.setExpensesState} />);  // Adds form data to the top-level state
 
             return form;
-        } else if (this.state.stage === 'oneTimeExpenses') {
+        } else if (this.props.stage === 'oneTimeExpenses') {
             const form = (<OneTimeExpensesForm
                 fields={[
                     { fieldLabel: 'Expense 1', fieldId1: 'expense1Name', fieldId2: 'expense1Value', fieldId3: 'expense1Date' },
@@ -78,11 +60,12 @@ class OnboardingForms extends Component {
                     { fieldLabel: 'Expense 4', fieldId1: 'expense4Name', fieldId2: 'expense4Value', fieldId3: 'expense1Date' },
                 ]}
                 grabFormData={this.props.grabFormData}
-                postClickRender={this.renderAccountBalances}
-                setOneTimeExpensesState={this.props.setOneTimeExpensesState} />);
+                switchStage={this.props.switchStage}  // Switchs stage in top-level state to trigger next form
+                newStage='accountBalances'
+                setOneTimeExpensesState={this.props.setOneTimeExpensesState} />);  // Adds form data to the top-level state
 
             return form;
-        } else if (this.state.stage === 'accountBalances') {
+        } else if (this.props.stage === 'accountBalances') {
             const form = (<ComposeForm
                 fields={[
                     { fieldLabel: 'Checking Account', fieldId: 'checking' },

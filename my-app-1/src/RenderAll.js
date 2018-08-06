@@ -46,10 +46,13 @@ class RenderAll extends Component {
             userLogin: {
                 isLoggedIn: false,
             },
+            stage: 'login',
         };
         this.grabFormData = this.grabFormData.bind(this);
-        this.logUserIn = this.logUserIn.bind(this);
+        this.switchStage = this.switchStage.bind(this);
+        this.setIncomeState = this.setIncomeState.bind(this);
         this.setExpensesState = this.setExpensesState.bind(this);
+        this.setOneTimeExpensesState = this.setOneTimeExpensesState.bind(this);
     }
 
     grabFormData(fieldList) {
@@ -63,12 +66,12 @@ class RenderAll extends Component {
         });
     }
 
-    logUserIn() {
-        this.setState({
-            userLogin: {
-                isLoggedIn: true,
-            },
-        });
+    switchStage(newStage) {
+        this.setState({ stage: newStage });
+    }
+
+    setIncomeState(incomeValue) {
+        this.setState({ income: incomeValue });
     }
 
     setExpensesState(expensesObject) {
@@ -78,6 +81,10 @@ class RenderAll extends Component {
     setOneTimeExpensesState(oneTimeExpensesObject) {
         this.setState(oneTimeExpensesObject);
     }
+
+    // setAccountBalances(accountBalancesObject) {
+    //     this.setState(accountBalancesObject);
+    // }
 
     render() {
         const components = [
@@ -90,14 +97,20 @@ class RenderAll extends Component {
                 loginStatus={this.state.userLogin.isLoggedIn}
                 logUserIn={this.logUserIn}
                 grabFormData={this.grabFormData}
-                setExpensesState={this.setExpensesState} />,
+                setIncomeState={this.setIncomeState}
+                setExpensesState={this.setExpensesState}
+                setOneTimeExpensesState={this.setOneTimeExpensesState}
+                // setAccountBalances={this.setAccountBalances}
+                switchStage={this.switchStage}
+                stage={this.state.stage} />,
         ];
 
         if ('income' in this.state) {
             components.splice(1, 0,
                 <SummaryCard
                     key='summary'
-                    state={this.state}
+                    currentStage={this.stage}
+                    switchStage={this.switchStage}
                     income={this.state.income}
                     expensesObject={this.state.expensesObject}
                     oneTimeExpensesObject={this.state.oneTimeExpensesObject} />
