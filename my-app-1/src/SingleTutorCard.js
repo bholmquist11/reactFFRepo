@@ -6,14 +6,18 @@ class SingleTutorCard extends Component {
     render() {
         return (
             <div className='TutorCard'>
-                <p> {this.props.name}<br />
-                    {this.props.major}<br />
-                    {this.props.year}<br />
-                    {this.props.hoursTaught}</p>
+                <p>{this.props.name}</p>
             </div>
         );
     }
 }
 
 
+
 export default SingleTutorCard;
+
+
+
+                    // {this.props.major}
+                    // {this.props.year}
+                    // {this.props.hoursTaught}...

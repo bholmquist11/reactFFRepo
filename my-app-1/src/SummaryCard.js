@@ -1,5 +1,6 @@
 import './SummaryCard.css';
 import React, { Component } from 'react';
+import AccountBalancesCard from './AccountBalancesCard';
 import { Col } from 'react-bootstrap';
 import SingleSummaryCard from './SingleSummaryCard';
 
@@ -7,18 +8,20 @@ class SummaryCard extends Component {
     constructor(props) {
         super(props);
 
-        this.sumExpenses = this.sumExpenses.bind(this);
+        this.sumValues = this.sumValues.bind(this);
     }
 
-    sumExpenses(expensesObject) {
+    sumValues(expensesObject) {
         let sumTotal = 0;
 
         for (let key in expensesObject) {
             let valueTempString = expensesObject[key].value;
 
-            let valueTemp = parseInt(valueTempString, 10);
+            if (valueTempString !== '') {
+                let valueTemp = parseInt(valueTempString, 10);
 
-            sumTotal += valueTemp;
+                sumTotal += valueTemp;
+            }
         }
 
         return sumTotal;
@@ -31,34 +34,45 @@ class SummaryCard extends Component {
             <SingleSummaryCard
                 label='Income'
                 value={this.props.income}
-                stage={this.props.stage}
+                stage={this.props.currentStage}
                 cardStage='income'
                 switchStage={this.props.switchStage} />
         );
 
         if (this.props.expensesObject) {
-            const sumExpenses = this.sumExpenses(this.props.expensesObject);
+            const sumValues = this.sumValues(this.props.expensesObject);
 
             jsxElements.push(
                 <SingleSummaryCard
                     label='Expenses'
-                    value={sumExpenses}
-                    stage={this.props.stage}
+                    value={sumValues}
+                    stage={this.props.currentStage}
                     cardStage='expenses'
                     switchStage={this.props.switchStage} />
             );
         }
 
         if (this.props.oneTimeExpensesObject) {
-            const sumOneTimeExpenses = this.sumExpenses(this.props.oneTimeExpensesObject);
+            const sumOneTimeExpenses = this.sumValues(this.props.oneTimeExpensesObject);
 
             jsxElements.push(
                 <SingleSummaryCard
                     label='One-time Expenses'
                     value={sumOneTimeExpenses}
-                    stage={this.props.stage}
+                    stage={this.props.currentStage}
                     cardStage='oneTimeExpenses'
                     switchStage={this.props.switchStage} />
+            );
+        }
+
+        if (this.props.accountBalancesObject) {
+            jsxElements.push(
+                <AccountBalancesCard
+                    label='Account Balances'
+                    stage={this.props.currentStage}
+                    cardStage='accountBalances'
+                    switchStage={this.props.switchStage}
+                    accountBalancesObject={this.props.accountBalancesObject} />
             );
         }
 

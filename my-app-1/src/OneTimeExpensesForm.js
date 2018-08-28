@@ -19,6 +19,8 @@ class OneTimeExpensesForm extends Component {
         const fields = this.props.fields;
 
         const fieldList = fields.map((fieldData) => {
+            const expenseLabel = fieldData.fieldLabel;
+
             const expenseName = document.getElementById(fieldData.fieldId1).value;
 
             const expenseValue = document.getElementById(fieldData.fieldId2).value;
@@ -26,7 +28,8 @@ class OneTimeExpensesForm extends Component {
             const expenseDate = document.getElementById(fieldData.fieldId3).value;
 
             const fieldFinal = {
-                name: expenseName,
+                name: expenseLabel,
+                userGivenName: expenseName,
                 value: expenseValue,
                 date: expenseDate,
             };
@@ -43,7 +46,11 @@ class OneTimeExpensesForm extends Component {
         for (const key in fieldList) {
             const tempData = fieldList[key];
 
+            console.log(tempData)
+
             oneTimeExpensesObjectTemp[tempData.name] = tempData;
+
+            console.log(oneTimeExpensesObjectTemp)
         }
 
         this.props.setOneTimeExpensesState({ oneTimeExpensesObject: oneTimeExpensesObjectTemp });
@@ -58,11 +65,14 @@ class OneTimeExpensesForm extends Component {
 
             const fieldId2 = field.fieldId2;
 
+            const fieldId3 = field.fieldId3;
+
             const fieldJSX = (<MultiTextEntryDate
                 key={fieldLabel}
                 fieldLabel={fieldLabel}
                 fieldId1={fieldId1}
-                fieldId2={fieldId2} />);
+                fieldId2={fieldId2}
+                fieldId3={fieldId3} />);
 
             return fieldJSX;
         });

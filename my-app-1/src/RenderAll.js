@@ -3,39 +3,14 @@ import Greeting from './Greeting.js';
 import HandleLogin from './HandleLogin.js';
 import SummaryCard from './SummaryCard.js';
 
-// const Parse = require('parse');
 
-// Parse.initialize('zTyCpMH8KpFOachUvQJmVR5ksWIv73PzPvfCFG6h',
-//     'pUWo38sEcvFN8BVKWMRbcrnnP54eWwfr1ebrHcsI');
+// CURRENT POSTIION
+// We've gotten our one-time expenses for working but havent checked if dates 
+// are storing correctly.
 
-// Parse.serverURL = 'https://penjiapp-dev.herokuapp.com/parse/1';
-
-// const user = new Parse.User();
-
-// user.save({
-//     username: 'bholmquist11',
-//     password: 'youknow',
-// }, {
-//     success: function(response) {
-//         alert('New object created! ObjectId: ' + response.id);
-//     },
-//     error: function(response, error) {
-//         alert('Error' + error.message);
-//     },
-// });
-
-// const query = new Parse.Query('User');
-
-// query.find({
-//     success: function(results) {
-//         alert('Success.' + results.length);
-//         console.log(results);
-
-//     },
-//     error: function(results, error) {
-//         alert('Error' + error.message);
-//     },
-// });
+// NEXT STEPS
+// Get accountBalances form working. STILL NOT.
+// Build and render <ProjectionForm /> once onboardingComplete state is reached.
 
 
 class RenderAll extends Component {
@@ -53,6 +28,8 @@ class RenderAll extends Component {
         this.setIncomeState = this.setIncomeState.bind(this);
         this.setExpensesState = this.setExpensesState.bind(this);
         this.setOneTimeExpensesState = this.setOneTimeExpensesState.bind(this);
+        this.setAccountBalancesState = this.setAccountBalancesState.bind(this);
+
     }
 
     grabFormData(fieldList) {
@@ -82,9 +59,10 @@ class RenderAll extends Component {
         this.setState(oneTimeExpensesObject);
     }
 
-    // setAccountBalances(accountBalancesObject) {
-    //     this.setState(accountBalancesObject);
-    // }
+    setAccountBalancesState(accountBalancesObject) {
+        this.setState(accountBalancesObject);
+    }
+
 
     render() {
         const components = [
@@ -100,11 +78,12 @@ class RenderAll extends Component {
                 setIncomeState={this.setIncomeState}
                 setExpensesState={this.setExpensesState}
                 setOneTimeExpensesState={this.setOneTimeExpensesState}
-                // setAccountBalances={this.setAccountBalances}
+                setAccountBalancesState={this.setAccountBalancesState}
                 switchStage={this.switchStage}
                 stage={this.state.stage} />,
         ];
 
+        // If we've finished a summarizable form, start rendering summary cards.
         if ('income' in this.state) {
             components.splice(1, 0,
                 <SummaryCard
@@ -113,9 +92,17 @@ class RenderAll extends Component {
                     switchStage={this.switchStage}
                     income={this.state.income}
                     expensesObject={this.state.expensesObject}
-                    oneTimeExpensesObject={this.state.oneTimeExpensesObject} />
+                    oneTimeExpensesObject={this.state.oneTimeExpensesObject}
+                    accountBalancesObject={this.state.accountBalancesObject} />
             );
         }
+
+        // If onboarding forms are done, replace HandleLogin with ProjectionTable
+        // if (this.state.stage === 'onboardingComplete') {
+        //     components.splice(3, 0,
+        //         <ProjectionTable />
+        //     );
+        // }
 
         return (
             <div key='allComponents'>

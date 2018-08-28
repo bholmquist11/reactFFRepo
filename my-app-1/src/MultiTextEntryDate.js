@@ -64,6 +64,8 @@ class MultiTextEntry extends Component {
                 </Col>
                 <Col xs={12} lg={3}>
                     <DatePicker
+                        id={this.props.fieldId3}
+                        name='datePicker1'
                         selected={this.state.startDate}
                         onChange={this.handleDateChange} />
                 </Col>

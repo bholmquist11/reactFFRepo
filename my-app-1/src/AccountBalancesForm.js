@@ -35,7 +35,7 @@ class ExpensesForm extends Component {
         // this.props.grabFormData(fieldList);  // Always pass a function. Process data, yes, but also do you want to render something new?
 
         // Now, we want to structure the data into a single object and then setState in parent
-        const expensesObjectTemp = {};
+        const accountBalancesObjectTemp = {};
 
         for (const key in fieldList) {
             const tempData = fieldList[key];
@@ -44,10 +44,10 @@ class ExpensesForm extends Component {
                 tempData.value = 0;
             }
 
-            expensesObjectTemp[tempData.name] = tempData;
+            accountBalancesObjectTemp[tempData.name] = tempData.value;
         }
 
-        this.props.setExpensesState({ expensesObject: expensesObjectTemp });
+        this.props.setAccountBalancesState({ accountBalancesObject: accountBalancesObjectTemp });
         this.props.switchStage(this.props.newStage);
     }
 
@@ -77,9 +77,6 @@ class ExpensesForm extends Component {
                 <FormGroup>
                     <Col smOffset={2} sm={10}>
                         <Button type='submit' onClick={this.handleClick}>Submit</Button>
-                    </Col>
-                    <Col smOffset={3}>
-                        Some Text
                     </Col>
                 </FormGroup>
             </Form>

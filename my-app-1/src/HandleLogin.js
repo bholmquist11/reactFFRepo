@@ -45,6 +45,7 @@ class HandleLogin extends Component {
             stage={this.props.stage}
             grabFormData={this.props.grabFormData}
             setExpensesState={this.props.setExpensesState}
+            setAccountBalancesState={this.props.setAccountBalancesState}
             renderExpenses={this.props.renderExpenses}
             switchStage={this.props.switchStage} />);
 
@@ -65,6 +66,7 @@ class HandleLogin extends Component {
             setIncomeState={this.props.setIncomeState}
             setExpensesState={this.props.setExpensesState}
             setOneTimeExpensesState={this.props.setOneTimeExpensesState}
+            setAccountBalancesState={this.props.setAccountBalancesState}
             renderExpenses={this.props.renderExpenses} />);
 
         return onboardingForms;

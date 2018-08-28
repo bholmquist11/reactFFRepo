@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ComposeForm from './ComposeForm.js';
+import AccountBalancesForm from './AccountBalancesForm';
 import ExpensesForm from './ExpensesForm.js';
 import IncomeForm from './IncomeForm.js';
 import OneTimeExpensesForm from './OneTimeExpensesForm.js';
@@ -66,17 +66,24 @@ class OnboardingForms extends Component {
 
             return form;
         } else if (this.props.stage === 'accountBalances') {
-            const form = (<ComposeForm
+            const form = (<AccountBalancesForm
                 fields={[
                     { fieldLabel: 'Checking Account', fieldId: 'checking' },
                     { fieldLabel: 'Savings and Investments', fieldId: 'savings' },
                     { fieldLabel: 'Credit Debt (-)', fieldId: 'credit' },
                 ]}
                 grabFormData={this.props.grabFormData}
-                postClickRender={this.completeOnboarding} />);
+                switchStage={this.props.switchStage}  // Switchs stage in top-level state to trigger next form
+                newStage='onboardingComplete'
+                setAccountBalancesState={this.props.setAccountBalancesState} />);
+
+            return form;
+        } else if (this.props.stage === 'onboardingComplete') {
+            const form = <p>Onboarding complete. Edit values using buttons above.</p>;
 
             return form;
         }
+
     }
 }
 

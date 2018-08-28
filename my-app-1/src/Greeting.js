@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Col } from 'react-bootstrap';
 
 class Greeting extends Component {
     constructor(props) {
@@ -13,7 +14,11 @@ class Greeting extends Component {
     }
 
     GuestGreeting() {
-        return <h1>Welcome, new user.</h1>;
+        return (
+            <Col smOffset={2}>
+                <h1>Welcome, new user.</h1>
+            </Col>
+        );
     }
 
     render() {
